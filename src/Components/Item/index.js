@@ -21,7 +21,8 @@ const ItemStyled = styled.li`
     };
 
     .reminder{
-      padding-left: 3rem;;
+      margin-left: -2rem;
+      padding-left: 2rem;
     }
 
     .reminder-text{  
@@ -35,7 +36,7 @@ const ItemStyled = styled.li`
         background-color: rgba(${(props) => props.color}, 0.3);
         border: 1px solid rgb(${(props) => props.color});
         border-style: solid none;
-        .reminder{  
+        .reminder-text{  
           box-shadow: none;
         }; 
       `}
@@ -47,7 +48,7 @@ const ItemStyled = styled.li`
 export const Item = ({color}) => {
   return (
     <ItemStyled color={color}>
-      <div className="reminder" tabindex="1">
+      <div className="reminder" tabIndex="1">
         <div class="check">
           <a>
             <BsCircle color={`rgb(${color})`} size={30}/>

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { BsFillCaretRightFill, BsFillCaretDownFill } from "react-icons/bs";
 
 const ListComponent = styled.div`
-
+    box-shadow:  0px -1px 0 0 #D3D3D3;
+    margin: 2rem;
     .header{
-        padding-left: 2rem;    
         div{
-            box-shadow:  0px 1px 0 0 #D3D3D3, 0px -1px 0 0 #D3D3D3;
+            box-shadow:  0px 1px 0 0 #D3D3D3;
             padding: 1rem 0;
             font-weight: 300;
             display: flex;
@@ -55,7 +55,7 @@ export const List = ({color, header}) => {
 };
 
 const Container = styled.main`
-    
+    grid-area: CT;
 `
 
 const Title = styled.h1`
