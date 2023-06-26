@@ -10,7 +10,7 @@ export const Grid = styled.div`
     display: grid;
     height: 100vh;
     /* grid-template-columns: auto ${props=> props.sidebar ? "350px" : "0"}; */
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 250px 1fr;
     grid-template-rows: 50px 1fr;
     grid-template-areas:  
     'MH MH'

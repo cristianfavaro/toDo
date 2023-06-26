@@ -4,8 +4,20 @@ import styled from 'styled-components';
 import { BsFillCaretRightFill, BsFillCaretDownFill } from "react-icons/bs";
 
 const ListComponent = styled.div`
-    box-shadow:  0px -1px 0 0 #D3D3D3;
     margin-left: 2rem;
+    position: relative;
+
+    .row-divider{
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        height: 1px;
+        background-color: lightgrey;
+        background-position: 0px 0px;
+        background-repeat: repeat;
+        top: 0px;
+    }
+
     .header{
         div{
             box-shadow:  0px 1px 0 0 #D3D3D3;
@@ -26,6 +38,7 @@ export const List = ({color, header}) => {
   const [collapsed, setCollapsed] = useState(false);
 
   return <ListComponent>
+    <div className='row-divider'/>
     
     {
         header && <div className='header'>

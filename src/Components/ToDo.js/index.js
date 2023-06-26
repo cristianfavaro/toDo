@@ -6,17 +6,16 @@ import { NewItem } from '../Item';
 
 const Container = styled.main`
     grid-area: CT;
-    flex: 1 1 0%;
     overflow: hidden;
-    >content{
-        flex: 1 1 0%;
+    .content{
+        display: flex;
+        flex-direction: column;
         height: -webkit-fill-available;
         >div{
             overflow: auto;
             flex: 1 0 0px;
         }
     };
-    
 `
 
 const Title = styled.h1`
@@ -30,8 +29,8 @@ const Title = styled.h1`
 export default function ToDo({color}){
     let { id } = useParams();
     return <Container>
-        <Title color={color}><span>Lembretes {id}</span></Title>
         <div className="content">
+            <Title color={color}><span>Lembretes {id}</span></Title>
             <div>
                 <List header="concluídos" color={color}/>
                 <List color={color}/>
