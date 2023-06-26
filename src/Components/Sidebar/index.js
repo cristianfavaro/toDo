@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePersistedReducer } from '../../hooks/usePersisted';
 import styled from 'styled-components';
-import { Routes, Route, Outlet, Link, MemoryRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   grid-area: SB;
@@ -21,7 +21,7 @@ const remindersReducer = (state, action) => {
   }
 };
 
-export const Sidebar = ({}) => {
+export const Sidebar = () => {
   const [reminders, dispatchReminders] = usePersistedReducer("reminders", remindersReducer, [
     {name: "Nova lista 1", id: 1, color: "96, 113, 201", items: []}
   ]);
@@ -39,22 +39,4 @@ export const Sidebar = ({}) => {
     
 
   </Container>
-}
-
-
-
-
-  <nav>
-  <ul>
-    <li>
-      <Link to="/">Home</Link>
-    </li>
-    <li>
-      <Link to="/about">About</Link>
-    </li>
-    <li>
-      <Link to="/dashboard">Dashboard</Link>
-    </li>
-    
-  </ul>
-</nav>
+};

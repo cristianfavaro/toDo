@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {Item, NewItem} from '../Item';
+import {Item} from '../Item';
 import styled from 'styled-components';
 import { BsFillCaretRightFill, BsFillCaretDownFill } from "react-icons/bs";
 
 const ListComponent = styled.div`
     box-shadow:  0px -1px 0 0 #D3D3D3;
-    margin: 2rem;
+    margin-left: 2rem;
     .header{
         div{
             box-shadow:  0px 1px 0 0 #D3D3D3;
@@ -54,24 +54,6 @@ export const List = ({color, header}) => {
     </ListComponent>
 };
 
-const Container = styled.main`
-    grid-area: CT;
-`
 
-const Title = styled.h1`
-    font-weight: 400;
-    padding-left: 2rem;
-    color: rgb(${props => props.color});
-`
-
-export const Main = ({color}) => {
-
-    return <Container>
-        <Title color={color}>Lembretes</Title>
-        <List header="concluídos" color={color}/>
-        <List color={color}/>
-        <NewItem/>
-    </Container>
-}
 
 
