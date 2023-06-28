@@ -4,7 +4,6 @@ import { BsCircle } from "react-icons/bs";
 const ItemStyled = styled.li`   
     position: relative; 
     list-style-type: none;
-    
     >div{
       display: flex;
       height: 3rem;
@@ -49,7 +48,7 @@ export const Item = ({color}) => {
   return (
     <ItemStyled color={color}>
       <div className="reminder" tabIndex="1">
-        <div class="check">
+        <div className="check">
           <a>
             <BsCircle color={`rgb(${color})`} size={30}/>
           </a>

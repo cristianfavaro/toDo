@@ -55,12 +55,10 @@ export const List = ({color, header}) => {
             </div>
         </div>
     }
-
-
     {
         !collapsed && <ul>
             {
-            data.map((item) => <Item color={color}>{item}</Item>)
+            data.map((item, i) => <Item key={i} color={color}>{item}</Item>)
             }
     </ul>
     }        
