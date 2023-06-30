@@ -32,10 +32,13 @@ const ListComponent = styled.div`
 `
 
 
-export const List = ({color, header}) => {
-  let data = ["Testando 1", "Testando 2", "Testando 3", "Testando 4", "Testando5", "Testando 6", "Testando", "Testando", "Testando"];
+export const List = ({color, header, children, list_id, items}) => {
 
   const [collapsed, setCollapsed] = useState(false);
+
+React.useEffect(()=>{
+    console.log(items, ' vendo aqui dentro')
+}, [items])
 
   return <ListComponent>
     <div className='row-divider'/>
@@ -57,13 +60,16 @@ export const List = ({color, header}) => {
     }
     {
         !collapsed && <ul>
-            {
-            data.map((item, i) => <Item key={i} color={color}>{item}</Item>)
-            }
-    </ul>
-    }        
+                {
+                    items && items.map( item => <Item key={item.id} item={item} list_id={list_id} color={color}>{item.name}</Item>)
+                }
+            {children}
+        </ul>
+    }
     </ListComponent>
 };
+
+
 
 
 

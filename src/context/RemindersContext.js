@@ -11,7 +11,36 @@ const remindersReducer = (state, action) => {
             const id = state.length + 1;
             return [...state, {name: `Nova lista ${id}`, id: id, color: "96, 113, 201", items: []}]
             
+        case "ADD_REMINDER":
+          return state.map(elem => elem.id == action.id ?
+              {...elem, "items": elem.items.concat({name: "", checked: false, id: elem.items.length})}
+            : 
+              elem 
+          )
+
+        // case "TOGGLE_CHECKED":
+        //   return state.map(elem => elem.id == action.list_id ? {
+        //         ...elem, "items": elem.items.map(item => item.id == action.id ? 
+        //               {...elem["item"], checked: !elem["item"].checked}
+        //           : 
+        //             item
+        //           )
+        //         } : elem
+        //   )
   
+
+        case "UPDATE_REMINDER":
+          return state.map(elem => elem.id == action.list_id ? {
+                ...elem, "items": elem.items.map(item => item.id == action.id ? 
+                      {...elem["item"], ...action["update"]}
+                  : 
+                    item
+                  )
+                } : elem
+          )
+
+
+
         case 'UPDATE_ITEM':
   
           return state.map(item => item.id === action.id ?

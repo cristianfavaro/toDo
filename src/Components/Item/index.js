@@ -1,8 +1,10 @@
 import styled, {css} from "styled-components";
 import { BsCircle } from "react-icons/bs";
+import { useDispatchReminders } from "../../context/RemindersContext";
 
 const ItemStyled = styled.li`   
     position: relative; 
+    cursor: pointer;
     list-style-type: none;
     >div{
       display: flex;
@@ -44,33 +46,41 @@ const ItemStyled = styled.li`
 
 
 
-export const Item = ({color}) => {
+export const Item = ({color, item, list_id}) => {
+  const dispatchReminders = useDispatchReminders();
+  const onClick = () => {
+    dispatchReminders({type: "UPDATE_REMINDER", id: item.id, list_id: list_id, update: {checked: !item.checked}})
+  }
   return (
     <ItemStyled color={color}>
       <div className="reminder" tabIndex="1">
-        <div className="check">
+        <div  className="check" onClick={onClick}>
           <a>
             <BsCircle color={`rgb(${color})`} size={30}/>
           </a>
         </div>
         <div className="reminder-text">
-              Testando
+              {item.name}
         </div>
       </div>
     </ItemStyled>
   );
 };
 
-export const NewItem = () => {
+export const NewItem = ({id}) => {
+  const dispatchReminders = useDispatchReminders();
+  
+  const onClick = () => {
+    console.log('apertei')
+    dispatchReminders({type: "ADD_REMINDER", id: id, reminder: ""})
+  }
   return (
-    <ItemStyled>
-      <div>
-        <div> 
-        </div>
+    <ItemStyled onClick={onClick}>
         <div className="reminder">
-              Novo Item
+          <div className="reminder-text">
+            Novo Item
+          </div>
         </div>
-      </div>
     </ItemStyled>
   );
 };

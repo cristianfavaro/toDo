@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import { usePersistedReducer } from '../../hooks/usePersisted';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { BsPlus } from "react-icons/bs";
 import { useReminders, useDispatchReminders } from '../../context/RemindersContext';
+import Editable from '../Editable';
 
 const Container = styled.div`
   grid-area: SB;
@@ -25,33 +25,8 @@ const NewListContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: end;
-  svg{
-    color: #fff;
-  }
+  color: #fff;
 `;
-
-
-const remindersReducer = (state, action) => {
-  
-  switch (action.type){
-
-      case 'ADD_ITEM':
-          const id = state.length + 1;
-          return [...state, {name: `Nova lista ${id}`, id: id, color: "96, 113, 201", items: []}]
-          
-
-      case 'UPDATE_ITEM':
-
-        return state.map(item => item.id === action.id ?
-              {...item, ...action.update}
-            : 
-              item 
-          )
-
-      default:
-          return;
-  }
-};
 
 
 const ListItem = ({reminder, dispatchReminders}) => {
@@ -67,13 +42,15 @@ const ListItem = ({reminder, dispatchReminders}) => {
   };
 
   return <li>
-    <Link 
-      contentEditable="true"
-      onInput={(e) => onInput(e.currentTarget.textContent)}
-      to={`/${reminder.id}`} suppressContentEditableWarning={true}
-    >
-      {nameState[0]}
-    </Link>
+    
+      <Link 
+        
+        to={`/${reminder.id}`} 
+      >
+        <Editable onInput={onInput}>
+          {nameState[0]}
+        </Editable>
+      </Link>
   </li>
 }
 

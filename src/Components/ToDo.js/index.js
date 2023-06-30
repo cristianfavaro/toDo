@@ -2,9 +2,8 @@ import React from 'react';
 import { useParams } from "react-router-dom";
 import { List } from '../List';
 import { NewItem } from '../Item';
-import { useReminders } from '../../context/RemindersContext';
+import { useReminders, useDispatchReminders } from '../../context/RemindersContext';
 import { Container, Title } from './styles';
-
 
 function getToDo(id, reminders){
     for (let i = 0; i < reminders.length; i++) {
@@ -14,19 +13,25 @@ function getToDo(id, reminders){
     };
 };
 
-
 export default function ToDo(){
     let { id } = useParams();
     const reminders = useReminders();
     const toDo = getToDo(id, reminders);
 
+    React.useEffect(()=>{
+        console.log(toDo)
+        console.log(toDo.items.filter(item => !item.checked))
+    }, [toDo])
+    
     return <Container>
         <div className="content">
             <Title color={toDo.color}><span>{toDo.name} {id}</span></Title>
             <div>
-                <List header="concluídos" color={toDo.color}/>
-                <List color={toDo.color}/>
-                <NewItem/>
+                <List list_id={id} items={toDo.items.filter(item => item.checked)} header="concluídos" color={toDo.color}/>
+                <List list_id={id} items={toDo.items.filter(item => !item.checked)} color={toDo.color}>
+                    <NewItem id={id}/>
+                </List>
+                
             </div>
         </div>
         
