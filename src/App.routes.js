@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Main } from "./Components/List";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import ToDo from './Components/ToDo.js';
 import styled from 'styled-components';
@@ -9,7 +8,6 @@ import { Sidebar } from './Components/Sidebar';
 export const Grid = styled.div`
     display: grid;
     height: 100vh;
-    /* grid-template-columns: auto ${props=> props.sidebar ? "350px" : "0"}; */
     grid-template-columns: 200px 1fr;
     grid-template-rows: 50px 1fr;
     grid-template-areas:  

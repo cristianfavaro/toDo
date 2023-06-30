@@ -17,15 +17,10 @@ export default function ToDo(){
     let { id } = useParams();
     const reminders = useReminders();
     const toDo = getToDo(id, reminders);
-
-    React.useEffect(()=>{
-        console.log(toDo)
-        console.log(toDo.items.filter(item => !item.checked))
-    }, [toDo])
     
     return <Container>
         <div className="content">
-            <Title color={toDo.color}><span>{toDo.name} {id}</span></Title>
+            <Title color={toDo.color}><span>{toDo.name}</span></Title>
             <div>
                 <List list_id={id} items={toDo.items.filter(item => item.checked)} header="concluídos" color={toDo.color}/>
                 <List list_id={id} items={toDo.items.filter(item => !item.checked)} color={toDo.color}>

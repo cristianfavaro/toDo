@@ -1,67 +1,44 @@
-import styled, {css} from "styled-components";
-import { BsCircle } from "react-icons/bs";
+import React, {useState} from "react";
+import { BsCircle, BsCircleFill } from "react-icons/bs";
 import { useDispatchReminders } from "../../context/RemindersContext";
-
-const ItemStyled = styled.li`   
-    position: relative; 
-    cursor: pointer;
-    list-style-type: none;
-    >div{
-      display: flex;
-      height: 3rem;
-      align-items: stretch;
-      position: relative;
-      >div{
-          display: flex;
-          align-items: center;
-      };
-    };  
-    a{
-        cursor: pointer;
-        position: absolute;
-    };
-
-    .reminder{
-      margin-left: -2rem;
-      padding-left: 2rem;
-    }
-
-    .reminder-text{  
-        box-shadow: 0 1px 0 0 #D3D3D3;
-        width: 100%;
-        margin-left: 3rem;
-    };
-   
-    >div:active, >div:focus { 
-      ${({color}) => color && css`
-        background-color: rgba(${(props) => props.color}, 0.3);
-        border: 1px solid rgb(${(props) => props.color});
-        border-style: solid none;
-        .reminder-text{  
-          box-shadow: none;
-        }; 
-      `}
-    };
-`;
-
+import Editable from "../Editable";
+import { ItemStyled } from "./styles";
 
 
 export const Item = ({color, item, list_id}) => {
+  // Componente responsável por criar cada item.
+
   const dispatchReminders = useDispatchReminders();
+  const nameState = useState(item.name);
+
   const onClick = () => {
     dispatchReminders({type: "UPDATE_REMINDER", id: item.id, list_id: list_id, update: {checked: !item.checked}})
-  }
+  };
+
+  const onInput = (textContent) =>{
+    dispatchReminders({
+      type: "UPDATE_REMINDER",
+      id: item.id, list_id: list_id,
+      update: {name: textContent},
+    });
+  };
+
+  const Marker = {
+    false: BsCircle,
+    true: BsCircleFill, 
+  }[item.checked];
+
   return (
     <ItemStyled color={color}>
       <div className="reminder" tabIndex="1">
         <div  className="check" onClick={onClick}>
           <a>
-            <BsCircle color={`rgb(${color})`} size={30}/>
+            <Marker color={`rgb(${color})`} size={30}/>
           </a>
         </div>
-        <div className="reminder-text">
-              {item.name}
-        </div>
+        <Editable onInput={onInput} className="reminder-text">
+          {nameState[0]}
+        </Editable>
       </div>
     </ItemStyled>
   );
@@ -71,7 +48,6 @@ export const NewItem = ({id}) => {
   const dispatchReminders = useDispatchReminders();
   
   const onClick = () => {
-    console.log('apertei')
     dispatchReminders({type: "ADD_REMINDER", id: id, reminder: ""})
   }
   return (

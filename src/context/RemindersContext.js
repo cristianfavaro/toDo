@@ -2,7 +2,6 @@ import React from 'react';
 import {usePersistedReducer} from '../hooks/usePersisted';
 const RemindersContext = React.createContext();
 
-
 const remindersReducer = (state, action) => {
   
     switch (action.type){
@@ -18,28 +17,15 @@ const remindersReducer = (state, action) => {
               elem 
           )
 
-        // case "TOGGLE_CHECKED":
-        //   return state.map(elem => elem.id == action.list_id ? {
-        //         ...elem, "items": elem.items.map(item => item.id == action.id ? 
-        //               {...elem["item"], checked: !elem["item"].checked}
-        //           : 
-        //             item
-        //           )
-        //         } : elem
-        //   )
-  
-
         case "UPDATE_REMINDER":
           return state.map(elem => elem.id == action.list_id ? {
                 ...elem, "items": elem.items.map(item => item.id == action.id ? 
-                      {...elem["item"], ...action["update"]}
+                      {...item, ...action["update"]}
                   : 
                     item
                   )
                 } : elem
           )
-
-
 
         case 'UPDATE_ITEM':
   
